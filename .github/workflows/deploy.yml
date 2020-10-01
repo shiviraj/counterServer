@@ -22,7 +22,7 @@ jobs:
 
       - name: clone heroku application
         run: |
-          heroku git:clone https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+          heroku git:clone https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git --app ${{ secrets.HEROKU_APP_NAME }}
           ls
           ls shiviraj-counter
 
