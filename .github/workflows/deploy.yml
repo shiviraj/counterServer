@@ -41,6 +41,7 @@ jobs:
         run: |
           ls
           cd react-app
+          echo 'in react app'
           ls
           npm install
           npm run build
