@@ -1,23 +1,16 @@
-name: Node.js CI
-
+name: Deploy
 on:
   push:
-    branches: [master]
-
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Login to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku login
-      - name: Build and push
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku push -a shiviraj-counter web
-      - name: Release
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku release -a shiviraj-counter web
+      - uses: akhileshns/heroku-deploy@v3.0.0
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'shiviraj-counter'
+          heroku_email: 'raj.shiviraj@gmail.com'
+          usedocker: true
