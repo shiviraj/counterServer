@@ -1,16 +1,30 @@
-name: Deploy
+name: Node CI
+
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.0.0
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'shiviraj-counter'
-          heroku_email: 'raj.shiviraj@gmail.com'
-          usedocker: true
+          node-version: ${{ matrix.node-version }}
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+      - name: GitHub Action for Heroku
+        uses: actions/heroku@1.0.0
+        # what can i do here to deploy my heroku app ?
+        env:
+          CI: true
