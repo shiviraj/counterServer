@@ -41,7 +41,7 @@ jobs:
         run: |
           cd react-app
           npm install
-          npm run-script build
+          npm run build
       - name: moving build to server
         run: |
           ls react-app
