@@ -42,8 +42,8 @@ jobs:
           ls
           cd react-app
           echo 'in react app'
-          ls
           npm install
+          ls
           react-script build
       - name: moving build to server
         run: |
