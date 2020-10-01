@@ -1,15 +1,19 @@
-name: CI
-on:
-  push:
-    branches: [master]
+on: [push]
+
 jobs:
-  build:
+  hello_world_job:
     runs-on: ubuntu-latest
+    name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - name: Run Tests
+      - name: Hello world action step
+        id: hello
+        uses: bugdriver/publish-react@v2
         with:
-          run: ./deploy.sh
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          server_repo: 'shiviraj/counterServer'
+          react_repo: 'shiviraj/counter'
+          heroku_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: 'shiviraj-counter'
-          heroku_email: 'raj.shiviraj@gmail.com'
+          github_user_email: 'raj.shiviraj@gmail.com'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
