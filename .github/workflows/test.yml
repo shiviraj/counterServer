@@ -1,0 +1,13 @@
+name: Test
+on: push
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: install
+        run: npm install
+      - name: test
+        run: npm run build
+        env:
+          CI: true
