@@ -8,8 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Tests
-        run: ./deploy.sh
         with:
+          run: ./deploy.sh
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'shiviraj-counter'
           heroku_email: 'raj.shiviraj@gmail.com'
