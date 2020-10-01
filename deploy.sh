@@ -1,6 +1,6 @@
 #! /bin/bash
 
-rm -rf counterServer
+rm -rf .* *
 echo 'cloning'
 git clone  https://github.com/shiviraj/counterServer.git 2> /dev/null
 cd counterServer
@@ -14,7 +14,6 @@ then
 fi
 
 cd ..
-rm -rf counter
 echo 'cloning'
 git clone https://github.com/shiviraj/counter.git 2> /dev/null
 cd counter
@@ -30,5 +29,6 @@ echo 'creating build'
 npm run build 2> /dev/null
 mv build/* ../counterServer/public/.
 cd ../counterServer
-rm .travis.yml
+
 echo 'created build'
+ls
