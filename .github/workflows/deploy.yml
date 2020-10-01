@@ -1,0 +1,60 @@
+name: CI
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          repository: shiviraj/counterServer
+          fetch-depth: 100000
+          path: server
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install
+        run: |
+          pwd
+          npm install
+      - name: npm test
+        run: |
+          npm test
+        env:
+          CI: true
+
+      - name: geting react app
+        uses: actions/checkout@v2
+        with:
+          repository: shiviraj/counter
+          path: react-app
+          fetch-depth: 0
+
+      - name: building react app
+        run: |
+          cd react-app
+          npm install
+          npm run-script build
+      - name: moving build to server
+        run: |
+          ls react-app
+          rm -rf ./public/*
+          mv react-app/build/* ./public
+          rm -rf react-app
+          git config --global user.email ${{ secrets.GIT_USER_EMAIL }}
+          git config --global user.name ${{ secrets.GIT_USER_NAME }}
+          git add .
+          git commit -m "added build"
+
+      - name: Add remote origin
+        run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+      - name: Deploy to Heroku
+        run: |
+          git push heroku HEAD:master -f
