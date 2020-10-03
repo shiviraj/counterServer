@@ -66,7 +66,7 @@ jobs:
           git add --all
           git commit -m "deployed"
           echo "committed successfully"
-          git push origin master -u
+          git push
 
       # git push origin master --set-upstream -f remote https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
       # git remote add origin git@github.com:shiviraj/counterBuild.git
