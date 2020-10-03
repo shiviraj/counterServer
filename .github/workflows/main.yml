@@ -38,6 +38,8 @@ jobs:
           mv build/* ../backend/public/.
           cd ..
           rm -rf frontend
+          mv backend/.* .
+          mv backend/* .
 
       # - name: Deploy on heroku
       - uses: akhileshns/heroku-deploy@v3.5.7
