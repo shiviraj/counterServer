@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout backend
+      - name: Checkout backend
         uses: actions/checkout@v2
         with:
           fetch-depth: 1000
@@ -19,7 +19,7 @@ jobs:
           npm install
           npm test
 
-      - name: checkout frontend
+      - name: Checkout frontend
         uses: actions/checkout@v2
         with:
           repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
@@ -39,7 +39,7 @@ jobs:
           cd ..
           rm -rf frontend
 
-      - name: checkout build repo
+      - name: Checkout build repo
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
           GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
