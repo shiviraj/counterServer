@@ -38,16 +38,9 @@ jobs:
           mv build/* ../backend/public/.
           cd ..
           rm -rf frontend
-
-      # - name: Directory Management
-      #   run: |
-      #     ls -al
-      #     mv backend/* .
-      #     ls -al
-
-      - uses: jctaveras/heroku-deploy@v1.0.0  # use the latest version of the action
-          with:
-            email: ${{ secrets.EMAIL }} # your heroku email
-            api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
-            app_name: ${{ secrets.HEROKU_APP_NAME }} # you aplication name
-            dockerfile_path: 'backend'
+      - uses: jctaveras/heroku-deploy@v1.0.0 # use the latest version of the action
+        with:
+          email: ${{ secrets.EMAIL }} # your heroku email
+          api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
+          app_name: ${{ secrets.HEROKU_APP_NAME }} # you aplication name
+          dockerfile_path: 'backend'
