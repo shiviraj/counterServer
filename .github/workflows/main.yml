@@ -54,7 +54,7 @@ jobs:
           git config --global user.name "shiviraj"
           git add .;
           git commit -m "deployed"
-          git logs 
+          git log
           git remote set-url --add origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
           git push origin master --set-upstream -f 
 
