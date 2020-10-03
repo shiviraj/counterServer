@@ -46,13 +46,11 @@ jobs:
 
       - name: Install SSH Client
         run: |
-          echo "${{secrets.DEPLOY_KEY}}" > ssh
-          cat ssh
+
           ls -al
           pwd
           eval "$(ssh-agent -s)"
-          ssh-add ssh
-          rm ssh
+          ssh-add ${{secrets.DEPLOY_KEY}}
 
       - name: Push to Repo
         run: |
