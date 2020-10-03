@@ -47,10 +47,10 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           BRANCH: build # The branch the action should deploy to.
           FOLDER: build # The folder the action should deploy.
-          ACCESS_TOKEN: ${{ secrets.TOKEN }}
+          ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
           REPOSITORY_NAME: shiviraj/counterBuild
           CLEAN: false # Automatically remove deleted files from the deploy branch
 
