@@ -66,6 +66,7 @@ jobs:
           cd build
           rm -rf *
           mv ../backend/* .
+          git remote set-url origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name "shiviraj"
           echo hello > hello.txt
