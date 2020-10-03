@@ -44,15 +44,14 @@ jobs:
           repository: ${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}
           path: build
 
-      - name: Setup SSH Keys and known_hosts
+      - name: Clone a remote repo
         env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+          GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
         run: |
-          cd build
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.DEPLOY_KEY }}"
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${DEPLOY_KEY}"
+          git clone git@github.com:shiviraj/jobsAlrtServer.git
 
       # - name: Some task that fetches dependencies
       #   env:
