@@ -32,14 +32,17 @@ jobs:
           mv build ../backend/
           cd ..
           rm -rf frontend
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}
+          path: build
       - name: Push to Build Repo
         run: |
-          cd backend
+          cd build
+          rm -rf ../backend/.git ../backend/.github
+          mv ../backend/* ../backend/.* .
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name ${{secrets.USERNAME}}
-          git remote add origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}.git
-          rm -rf coverage scripts
-          rm -rf .github
           git add .
           git commit -m "added build"
           git push origin master --set-upstream -f;
