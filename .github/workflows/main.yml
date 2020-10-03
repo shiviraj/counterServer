@@ -38,9 +38,16 @@ jobs:
           mv build/* ../backend/public/.
           cd ..
           rm -rf frontend
-      - uses: jctaveras/heroku-deploy@v1.0.0 # use the latest version of the action
+
+      - name: directory manage
+        run: |
+          ls -al
+          mv backend/* .
+          echo 'moved ==============>'
+          la -al
+
+      - uses: akhileshns/heroku-deploy@v3.5.7 # This is the action
         with:
-          email: ${{ secrets.EMAIL }} # your heroku email
-          api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
-          app_name: ${{ secrets.HEROKU_APP_NAME }} # you aplication name
-          dockerfile_path: 'backend'
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'shiviraj-counter' #Must be unique in Heroku
+          heroku_email: 'raj.shiviraj@gmail.com'
