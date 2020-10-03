@@ -52,7 +52,7 @@ jobs:
           FOLDER: build # The folder the action should deploy.
           ACCESS_TOKEN: ${{ secrets.TOKEN }}
           REPOSITORY_NAME: shiviraj/counterBuild
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          CLEAN: false # Automatically remove deleted files from the deploy branch
 
 
       # - name: Push to Repo
