@@ -37,7 +37,7 @@ jobs:
           cd backend
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name ${{secrets.USERNAME}}
-          git remote add https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}.git
+          git remote add https://${{secrets.TOKEN}}:x-oauth-basic@github.com/${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}.git
           rm -rf coverage scripts
           rm -rf .github
           git add .
