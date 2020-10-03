@@ -13,36 +13,36 @@ jobs:
           repository: ${{secrets.USERNAME}}/${{secrets.BACKEND_REPO}}
           path: backend
 
-      # - name: Testing Backend
-      #   run: |
-      #     cd backend
-      #     npm install
-      #     npm test
+      - name: Testing Backend
+        run: |
+          cd backend
+          npm install
+          npm test
 
-      # # - name: checkout frontend
-      # - uses: actions/checkout@v2
-      #   with:
-      #     repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
-      #     path: frontend
+      # - name: checkout frontend
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
+          path: frontend
 
-      # - name: Testing frontend
-      #   run: |
-      #     cd frontend
-      #     npm install
-      #     npm test
+      - name: Testing frontend
+        run: |
+          cd frontend
+          npm install
+          npm test
 
-      # - name: Building frontend
-      #   run: |
-      #     cd frontend
-      #     npm run build
-      #     mv build/* ../backend/public/.
-      #     cd ..
-      #     rm -rf frontend
+      - name: Building frontend
+        run: |
+          cd frontend
+          npm run build
+          mv build/* ../backend/public/.
+          cd ..
+          rm -rf frontend
 
       - name: Push to Repo
         run: |
           cd backend
-          rm -rf .git
+          rm -rf .git .github
           git init
           git remote add origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
