@@ -47,11 +47,11 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          BRANCH: master # The branch the action should deploy to.
-          FOLDER: 'backend' # The folder the action should deploy.
+          GITHUB_TOKEN: ${{secrets.TOKEN}}
+          BRANCH: master
+          FOLDER: backend
+          REPOSITORY_NAME: shiviraj/counterBuild
           CLEAN: false
-          REPOSITORY_NAME: "shiviraj/counterBuild",
 
       # - name: Push to Repo
       #   run: |
