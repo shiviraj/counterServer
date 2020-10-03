@@ -44,10 +44,13 @@ jobs:
           repository: ${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}
           path: build
 
-      - name: Install SSH Client 🔑
-        uses: webfactory/ssh-agent@v0.2.0
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+      - name: Install SSH Client
+        run: |
+          echo ${{ secrets.DEPLOY_KEY }} > ssh
+          cat ssh
+          eval ssh-agent
+          ssh-add ssh
+          rm ssh
 
       - name: Push to Repo
         run: |
