@@ -59,6 +59,8 @@ jobs:
       #   run: ./fetch-deps.sh
 
       - name: Push to Repo
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           cd build
           rm -rf *
