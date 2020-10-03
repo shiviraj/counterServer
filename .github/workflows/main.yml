@@ -39,15 +39,12 @@ jobs:
           cd ..
           rm -rf frontend
 
-      - name: directory manage
+      - name: Deploy to Heroku
         run: |
-          ls -al
-          mv backend/* .
-          echo 'moved ==============>'
-          ls -al
-
-      - uses: akhileshns/heroku-deploy@v3.5.7 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'shiviraj-counter' #Must be unique in Heroku
-          heroku_email: 'raj.shiviraj@gmail.com'
+          cd backend
+          git config --global user.email "58025059+shiviraj@users.noreply.github.com"
+          git config --global user.name "shiviraj"
+          git remote add heroku https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/shivi-counter.git
+          git add .;
+          git commit -m "deployed"
+          git push heroku master --set-upstream -f;
