@@ -56,11 +56,11 @@ jobs:
           git remote -v
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name "shiviraj"
-
-          # git add --all
-          # git commit -m "deployed"
+          echo hell > hello.txt
+          git add --all
+          git commit -m "deployed"
           echo "committed successfully"
-          git push origin master --set-upstream -f --no-verify
+          git push origin master -uf --no-verify
 
       # git push origin master --set-upstream -f remote https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
       # git remote add origin git@github.com:shiviraj/counterBuild.git
