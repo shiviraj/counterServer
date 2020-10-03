@@ -57,7 +57,7 @@ jobs:
           curl -u "shiviraj:${{secrets.TOKEN}}" https://github.com/shiviraj/counterBuild.git
           git remote set-url --add origin https://shiviraj:${{secrets.TOKEN}}@github.com/shiviraj/counterBuild.git
           echo "committed successfully"
-          git push origin master --set-upstream -f 
+          git push origin master -f 
 
 
           # git push origin master --set-upstream -f remote https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
