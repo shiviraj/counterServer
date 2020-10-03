@@ -49,7 +49,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: master # The branch the action should deploy to.
-          FOLDER: build # The folder the action should deploy.
+          FOLDER: backend # The folder the action should deploy.
           ACCESS_TOKEN: ${{ secrets.TOKEN }}
           REPOSITORY_NAME: shiviraj/counterBuild
           CLEAN: true # Automatically remove deleted files from the deploy branch
