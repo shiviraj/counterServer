@@ -39,16 +39,15 @@ jobs:
           cd ..
           rm -rf frontend
 
-      - name: Directory Management
-        run: |
-          ls -al
-          mv backend/* .
-          ls -al
+      # - name: Directory Management
+      #   run: |
+      #     ls -al
+      #     mv backend/* .
+      #     ls -al
 
-      # - name: Deploy on heroku
-      - uses: akhileshns/heroku-deploy@v3.5.7
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'shivi-counter'
-          heroku_email: 'raj.shiviraj@gmail.com'
-          usedocker: true
+      - uses: jctaveras/heroku-deploy@v1.0.0  # use the latest version of the action
+          with:
+            email: ${{ secrets.EMAIL }} # your heroku email
+            api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
+            app_name: ${{ secrets.HEROKU_APP_NAME }} # you aplication name
+            dockerfile_path: 'backend'
