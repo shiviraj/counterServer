@@ -44,36 +44,28 @@ jobs:
           repository: ${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}
           path: build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
-        with:
-          GITHUB_TOKEN: ${{secrets.TOKEN}}
-          BRANCH: master
-          FOLDER: backend
-          REPOSITORY_NAME: shiviraj/counterBuild
-          CLEAN: true
+      - name: Push to Repo
+        run: |
+          cd build
+          rm -rf *
+          mv ../backend/* .
+          git remote -v
+          git remote rm origin
+          echo "removed remote"
+          git remote add origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
+          git remote -v
+          git config --global user.email "58025059+shiviraj@users.noreply.github.com"
+          git config --global user.name "shiviraj"
 
-      # - name: Push to Repo
-      #   run: |
-      #     cd build
-      #     rm -rf *
-      #     mv ../backend/* .
-      #     git remote -v
-      #     git remote rm origin
-      #     echo "removed remote"
-      #     git remote add origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
-      #     git remote -v
-      #     git config --global user.email "58025059+shiviraj@users.noreply.github.com"
-      #     git config --global user.name "shiviraj"
-
-      #     # git add --all
-      #     # git commit -m "deployed"
-      #     echo "committed successfully"
-      #     git push origin master --set-upstream -f
+          # git add --all
+          # git commit -m "deployed"
+          echo "committed successfully"
+          git push origin master --set-upstream -f --no-verify
 
       # git push origin master --set-upstream -f remote https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
       # git remote add origin git@github.com:shiviraj/counterBuild.git
       # git remote add heroku https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/shivi-counter.git
+
 # git remote add origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
 # curl -u "shiviraj:${{secrets.TOKEN}}" https://github.com/shiviraj/counterBuild.git
 # git remote set-url --add origin https://shiviraj:${{secrets.TOKEN}}@github.com/shiviraj/counterBuild.git
