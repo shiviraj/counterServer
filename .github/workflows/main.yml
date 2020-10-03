@@ -46,7 +46,7 @@ jobs:
 
       - name: Install SSH Client
         run: |
-          echo ${{ secrets.HEROKU_API_KEY }} > ssh
+          echo ${{ secrets.DEPLOY_KEY }} > ssh
           cat ssh
           eval ssh-agent
           ssh-add ssh
