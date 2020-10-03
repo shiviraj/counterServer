@@ -46,10 +46,9 @@ jobs:
 
       - name: Push to Repo
         run: |
-          cd backend
-          rm -rf .git .github
-          mv ../build/.git .
-          echo "hello" > hello.txt
+          cd build
+          rm -rf *
+          mv -rf ../backend/* .
           git remote rm origin
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name "shiviraj"
@@ -58,7 +57,7 @@ jobs:
           git commit -m "deployed"
           echo "committed successfully"
           git remote add origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
-          git push --all
+          git push origin master --set-upstream -f
 
 
           # git push origin master --set-upstream -f remote https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
