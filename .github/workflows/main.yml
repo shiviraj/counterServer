@@ -16,23 +16,23 @@ jobs:
           cd backend
           npm install
           npm test
-      - uses: actions/checkout@v2
-        with:
-          repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
-          path: frontend
-      # - name: Testing frontend
+      # - uses: actions/checkout@v2
+      #   with:
+      #     repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
+      #     path: frontend
+      # # - name: Testing frontend
+      # #   run: |
+      # #     cd frontend
+      # #     npm install
+      # #     npm test
+      # - name: Building frontend
       #   run: |
       #     cd frontend
       #     npm install
-      #     npm test
-      - name: Building frontend
-        run: |
-          cd frontend
-          npm install
-          npm run build
-          mv build ../backend/
-          cd ..
-          rm -rf frontend
+      #     npm run build
+      #     mv build ../backend/
+      #     cd ..
+      #     rm -rf frontend
       - uses: actions/checkout@v2
         with:
           repository: ${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}
@@ -49,7 +49,7 @@ jobs:
           git add .
           git commit -m "added build"
           echo "successfully committed \n\n<------->\n\n"
-          git push -f;
+          git push -fq origin main;
       # - name: Deploy 🚀
       #   uses: JamesIves/github-pages-deploy-action@3.6.2
       #   with:
