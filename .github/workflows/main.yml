@@ -41,8 +41,8 @@ jobs:
 
       - name: Directory Management
         run: |
+          ls -al
           mv backend/* .
-          mv backend/.* .
           ls -al
 
       # - name: Deploy on heroku
