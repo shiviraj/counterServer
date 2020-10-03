@@ -6,54 +6,43 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout backend
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1000
           repository: ${{secrets.USERNAME}}/${{secrets.BACKEND_REPO}}
           path: backend
+
       - name: Testing Backend
         run: |
           cd backend
           npm install
           npm test
+
+      - name: checkout frontend
       - uses: actions/checkout@v2
         with:
           repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
           path: frontend
+
       - name: Testing frontend
         run: |
           cd frontend
           npm install
           npm test
+
       - name: Building frontend
         run: |
           cd frontend
-          npm install
           npm run build
-          mv build ../backend/
+          mv build/* ../backend/public/.
           cd ..
           rm -rf frontend
-      - uses: actions/checkout@v2
+
+      - name: Deploy on heroku
+      - uses: akhileshns/heroku-deploy@v3.5.7
         with:
-          repository: ${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}
-          path: build
-      - name: Push to Build Repo
-        run: |
-          cd build
-          rm -rf ../backend/.git ../backend/.github
-          mv ../backend/* .
-          rm -rf node_modules
-          git config --global user.email "58025059+shiviraj@users.noreply.github.com"
-          git config --global user.name ${{secrets.USERNAME}}
-          git remote add origin https://${{secrets.USERNAME}}:${{secrets.TOKEN}}@github.com/${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}.git master
-          git add .
-          git commit -m "added build"
-          echo "successfully committed \n\n<------->\n\n"
-          ls -a && ls -a .git
-          git push -u origin master
-      # - name: Deploy 🚀
-      #   uses: JamesIves/github-pages-deploy-action@3.6.2
-      #   with:
-      #     GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      #     BRANCH: main # The branch the action should deploy to.
-      #     FOLDER: build # The folder the action should deploy.
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.EMAIL}}
+          usedocker: true
