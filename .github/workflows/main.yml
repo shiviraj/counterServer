@@ -39,11 +39,6 @@ jobs:
       #     cd ..
       #     rm -rf frontend
 
-      - uses: actions/checkout@v2
-        with:
-          repository: ${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}
-          path: build
-
       # - name: Some task that fetches dependencies
       #   env:
       #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -56,17 +51,19 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${DEPLOY_KEY}"
-          cd build
+          git clone git@github.com:shiviraj/counterBuild.git
+          cd counterBuild
           rm -rf *
+          ls -al
           mv ../backend/* .
-          git remote set-url origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name "shiviraj"
           echo hello > hello.txt
+          ls -al
           git add --all
           git commit -m "deployed"
           echo "committed successfully"
-          git push
+          git push origin master
 
       # git push origin master --set-upstream -f remote https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
       # git remote add origin git@github.com:shiviraj/counterBuild.git
