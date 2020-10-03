@@ -46,9 +46,11 @@ jobs:
 
       - name: Install SSH Client
         run: |
-          echo ${{ secrets.DEPLOY_KEY }} > ssh
+          echo "${{secrets.DEPLOY_KEY}}" > ssh
           cat ssh
-          eval ssh-agent
+          ls -al
+          pwd
+          eval "$(ssh-agent -s)"
           ssh-add ssh
           rm ssh
 
