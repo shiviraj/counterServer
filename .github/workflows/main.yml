@@ -49,6 +49,7 @@ jobs:
           git add .
           git commit -m "added build"
           echo "successfully committed \n\n<------->\n\n"
+          ls -a
           git push https://${{secrets.USERNAME}}:${{secrets.TOKEN}}@github.com/${{secrets.BUILD_REPO}}.git
       # - name: Deploy 🚀
       #   uses: JamesIves/github-pages-deploy-action@3.6.2
