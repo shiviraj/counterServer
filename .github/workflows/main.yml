@@ -47,7 +47,8 @@ jobs:
           git remote set-url origin https://${{secrets.TOKEN}}@github.com/${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}.git
           git add .
           git commit -m "added build"
-          git push origin master -f;
+          echo "successfully committed \n\n<------->\n\n"
+          git push origin main -f;
       # - name: Deploy 🚀
       #   uses: JamesIves/github-pages-deploy-action@3.6.2
       #   with:
