@@ -44,6 +44,11 @@ jobs:
           repository: ${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}
           path: build
 
+      # - name: Some task that fetches dependencies
+      #   env:
+      #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      #   run: ./fetch-deps.sh
+
       - name: Clone a remote repo
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
@@ -51,17 +56,6 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${DEPLOY_KEY}"
-          git clone git@github.com:shiviraj/jobsAlrtServer.git
-
-      # - name: Some task that fetches dependencies
-      #   env:
-      #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      #   run: ./fetch-deps.sh
-
-      - name: Push to Repo
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
           cd build
           rm -rf *
           mv ../backend/* .
