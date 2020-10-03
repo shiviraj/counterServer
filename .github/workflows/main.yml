@@ -44,7 +44,7 @@ jobs:
           ls -al
           mv backend/* .
           echo 'moved ==============>'
-          la -al
+          ls -al
 
       - uses: akhileshns/heroku-deploy@v3.5.7 # This is the action
         with:
