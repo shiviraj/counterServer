@@ -40,7 +40,7 @@ jobs:
         run: |
           cd build
           rm -rf ../backend/.git ../backend/.github
-          mv ../backend/* ../backend/.* .
+          mv ../backend/* .
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name ${{secrets.USERNAME}}
           git add .
