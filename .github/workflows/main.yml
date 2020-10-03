@@ -55,7 +55,7 @@ jobs:
           git commit -m "deployed"
           echo "committed successfully"
           echo $GITHUB_REF
-          git push https://shiviraj:${{secrets.TOKEN}}@github.com/shiviraj/counterBuild.git $GITHUB_REF
+          git push -uf https://shiviraj:${{secrets.TOKEN}}@github.com/shiviraj/counterBuild.git $GITHUB_REF
 
 
           # git push origin master --set-upstream -f remote https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
