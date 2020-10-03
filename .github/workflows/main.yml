@@ -49,13 +49,14 @@ jobs:
           cd backend
           rm -rf .git .github
           mv ../build/.git .
+          git remote remove origin
+          git remote add origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name "shiviraj"
           git add .
           git commit -m "deployed"
           echo "committed successfully"
-          echo $GITHUB_REF
-          git push -uf https://shiviraj:${{secrets.TOKEN}}@github.com/shiviraj/counterBuild.git master
+          git push origin master --set-upstream -f
 
 
           # git push origin master --set-upstream -f remote https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
