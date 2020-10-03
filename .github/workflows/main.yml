@@ -11,9 +11,11 @@ jobs:
         with:
           fetch-depth: 1000
           repository: ${{secrets.USERNAME}}/${{secrets.BACKEND_REPO}}
+          path: backend
 
       - name: Testing Backend
         run: |
+          cd backend
           npm install
           npm test
 
@@ -33,9 +35,14 @@ jobs:
         run: |
           cd frontend
           npm run build
-          mv build/* ../public/.
+          mv build/* ../backend/public/.
           cd ..
           rm -rf frontend
+
+      - name: Directory Management
+        run: |
+          mv backend/* .
+          mv backend/.* .
           ls -al
 
       # - name: Deploy on heroku
