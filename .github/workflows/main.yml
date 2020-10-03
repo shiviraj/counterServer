@@ -1,0 +1,45 @@
+name: CI
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1000
+          repository: ${{secrets.USERNAME}}/${{secrets.BACKEND_REPO}}
+          path: backend
+          - name: Testing Backend
+          run: |
+            cd backend
+            npm install
+            npm test
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
+          path: frontend
+      - name: Testing frontend
+        run: |
+          cd frontend
+          npm install
+          npm test
+      - name: Building frontend
+        run: |
+          cd frontend
+          npm run build
+          mv build ../backend/
+          cd ..
+          rm -rf frontend
+      - name: Push to Build Repo
+        run: |
+          cd backend
+          git config --global user.email "58025059+shiviraj@users.noreply.github.com"
+          git config --global user.name ${{secrets.USERNAME}}
+          git remote add https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}.git
+          rm -rf coverage scripts
+          rm -rf .github
+          git add .
+          git commit -m "added build"
+          git push origin master --set-upstream -f;
