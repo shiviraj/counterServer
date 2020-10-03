@@ -51,7 +51,7 @@ jobs:
           BRANCH: master
           FOLDER: backend
           REPOSITORY_NAME: shiviraj/counterBuild
-          CLEAN: false
+          CLEAN: true
 
       # - name: Push to Repo
       #   run: |
