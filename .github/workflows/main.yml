@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout backend
+      # - name: checkout backend
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1000
@@ -19,7 +19,7 @@ jobs:
           npm install
           npm test
 
-      - name: checkout frontend
+      # - name: checkout frontend
       - uses: actions/checkout@v2
         with:
           repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
@@ -39,7 +39,7 @@ jobs:
           cd ..
           rm -rf frontend
 
-      - name: Deploy on heroku
+      # - name: Deploy on heroku
       - uses: akhileshns/heroku-deploy@v3.5.7
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
