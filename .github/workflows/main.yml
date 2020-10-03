@@ -49,14 +49,11 @@ jobs:
           cd build
           rm -rf *
           mv ../backend/* .
-          git remote -v
-          git remote rm origin
-          echo "removed remote"
           git remote set-url origin https://${{secrets.TOKEN}}:x-oauth-basic@github.com/shiviraj/counterBuild.git
           git remote -v
           git config --global user.email "58025059+shiviraj@users.noreply.github.com"
           git config --global user.name "shiviraj"
-          echo hell > hello.txt
+          echo hello > hello.txt
           git add --all
           git commit -m "deployed"
           echo "committed successfully"
