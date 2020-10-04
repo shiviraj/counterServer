@@ -8,7 +8,7 @@ import App from '../src/App';
 
 const router = express.Router();
 
-router.use('^/$', (req, res, next) => {
+router.use((req, res, next) => {
   fs.readFile(path.resolve('../public/index.html'), 'utf8', (err, data) => {
     if (err) {
       return res.status(500).send('An error occurred');
