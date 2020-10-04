@@ -45,16 +45,11 @@ jobs:
           GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
         run: |
           eval "$(ssh-agent -s)"
-          ssh-add -t 120 - <<< "${DEPLOY_KEY}"
+          ssh-add - <<< "${DEPLOY_KEY}"
           git clone git@github.com:${{secrets.USERNAME}}/${{secrets.BUILD_REPO}}.git build
 
       - name: Move new builds to build repo
-        env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-          GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
         run: |
-          eval "$(ssh-agent -s)"
-          ssh-add -t 120 - <<< "${DEPLOY_KEY}"
           cd build
           rm -rf *
           mv ../backend/* .
@@ -64,8 +59,6 @@ jobs:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
           GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no'
         run: |
-          eval "$(ssh-agent -s)"
-          ssh-add -t 120 - <<< "${DEPLOY_KEY}"
           cd build
           git config --global user.email "58025059+${{secrets.USERNAME}}@users.noreply.github.com"
           git config --global user.name "${{secrets.USERNAME}}"
