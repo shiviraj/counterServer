@@ -4,7 +4,7 @@ const router = require('./src/app');
 const app = express();
 let count = 0;
 
-app.use('^/$', app);
+app.use('^/$', router);
 app.use(express.static('./public'));
 
 app.get('/api/count', (_req, res) => res.json({ count }));

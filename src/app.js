@@ -1,10 +1,10 @@
-import path from 'path';
-import fs from 'fs';
+const path = require('path');
+const fs = require('fs');
 
-import express from 'express';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import App from '../src/App';
+const express = require('express');
+const React = require('react');
+const ReactDOMServer = require('react-dom/server');
+const App = require('../src/App');
 
 const router = express.Router();
 
