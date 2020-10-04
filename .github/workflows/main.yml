@@ -20,12 +20,9 @@ jobs:
           npm test
 
       - name: Checkout frontend
-        uses: actions/checkout@v2
-        with:
-          run: |
-            eval "$(ssh-agent -s)" && ssh-add - <<< "${{secrets.DEPLOY}}"
-          repository: ${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}
-          path: frontend
+        run: |
+          eval "$(ssh-agent -s)" && ssh-add - <<< "${{secrets.DEPLOY}}"
+          git clone git@github.com:${{secrets.USERNAME}}/${{secrets.FRONTEND_REPO}}.git frontend
 
       - name: Testing frontend
         run: |
