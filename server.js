@@ -2,7 +2,7 @@ const express = require('express');
 const router = require('./src/app');
 
 const app = express();
-let count = 0;
+let count = 100;
 
 app.use('^/$', router);
 app.use(express.static('./public'));
